@@ -1,7 +1,7 @@
 package com.citytechinc.cq.groovyconsole.servlets
 
 import com.citytechinc.cq.groovyconsole.services.GroovyConsoleService
-import groovy.json.JsonBuilder
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.felix.scr.annotations.Reference
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.SlingHttpServletRequest
@@ -22,7 +22,7 @@ class ScriptSavingServlet extends SlingAllMethodsServlet {
         def result = consoleService.saveScript(request)
 
         response.contentType = "application/json"
-
-        new JsonBuilder(result).writeTo(response.writer)
+        def mapper = new ObjectMapper()
+        mapper.writeValue(response.writer,result)
     }
 }

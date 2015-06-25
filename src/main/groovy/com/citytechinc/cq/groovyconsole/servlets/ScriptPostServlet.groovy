@@ -2,7 +2,7 @@ package com.citytechinc.cq.groovyconsole.servlets
 
 import com.citytechinc.cq.groovyconsole.services.ConfigurationService
 import com.citytechinc.cq.groovyconsole.services.GroovyConsoleService
-import groovy.json.JsonBuilder
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.Deactivate
 import org.apache.felix.scr.annotations.Reference
@@ -39,8 +39,8 @@ class ScriptPostServlet extends SlingAllMethodsServlet {
             def result = consoleService.runScript(request)
 
             response.contentType = "application/json"
-
-            new JsonBuilder(result).writeTo(response.writer)
+            def mapper = new ObjectMapper()
+            mapper.writeValue(response.writer,result)
         } else {
             response.setStatus(SC_FORBIDDEN)
         }

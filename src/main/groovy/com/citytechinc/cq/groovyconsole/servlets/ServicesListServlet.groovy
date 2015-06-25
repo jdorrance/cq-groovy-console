@@ -1,6 +1,6 @@
 package com.citytechinc.cq.groovyconsole.servlets
 
-import groovy.json.JsonBuilder
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.commons.lang3.StringUtils
 import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.sling.SlingServlet
@@ -27,8 +27,8 @@ class ServicesListServlet extends SlingSafeMethodsServlet {
         def services = getServicesMap()
 
         response.contentType = "application/json"
-
-        new JsonBuilder(adapters + services).writeTo(response.writer)
+        def mapper = new ObjectMapper()
+        mapper.writeValue(response.writer,(adapters + services))
     }
 
     def getAdaptersMap() {

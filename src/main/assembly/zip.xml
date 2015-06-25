@@ -37,6 +37,8 @@
                 <include>com.citytechinc.cq:cq-groovy-console</include>
 	            <include>com.citytechinc.aem.groovy.extension:aem-groovy-extension-bundle</include>
 	            <include>org.codehaus.groovy:groovy-all</include>
+                <include>com.fasterxml.jackson.core:jackson-databind</include>
+                <include>com.fasterxml.jackson.core:jackson-core</include>
             </includes>
         </dependencySet>
     </dependencySets>
